@@ -1,0 +1,85 @@
+<form [formGroup]="bookManagementForm" (ngSubmit)="updateBookInfo()">
+    <div class="card-container" >
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <mat-card-title>Add/Update Book </mat-card-title>
+                    <mat-card-subtitle>Book Details </mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Book Title </mat-label>
+                        <input matInput type="text" id="bookTitle" name="bookTitle" formControlName="bookTitle">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Author </mat-label>
+                        <input matInput type="text" id="author" name="author" formControlName="author">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>ISBN </mat-label>
+                        <input matInput type="text" id="isbn" name="isbn" formControlName="isbn">
+                        <mat-hint>xxx-x-xx-xxxxxx-x</mat-hint>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Publisher </mat-label>
+                        <input matInput type="text" id="publisher" name="publisher" formControlName="publisher">
+                    </mat-form-field>
+                </p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <mat-card-title><p></p></mat-card-title>
+                    <mat-card-subtitle>Misc details</mat-card-subtitle>
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+                <div formGroupName="bookDetails">
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>No. of Pages </mat-label>
+                            <input matInput type="text" id="numberOfPages" name="numberOfPages" formControlName="numberOfPages">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Format </mat-label>
+                            <mat-select id="format" name="format" formControlName="format" multiple>
+                                <mat-option *ngFor="let format of bookFormats" [value]="format.value">
+                                    {{ format.text }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Country of Origin </mat-label>
+                            <mat-select id="countryOfOrigin" name="countryOfOrigin" formControlName="countryOfOrigin">
+                                @for (country of countries; track country) {
+                                    <mat-option [value]="country">{{ country.name }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Price </mat-label>
+                            <input matInput type="text" id="price" name="price" formControlName="price">
+                        </mat-form-field>
+                    </p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <button mat-stroked-button type="submit">Save</button>
+        <button mat-stroked-button style="color: red;" type="button">Cancel</button>
+    </div>
+</form>
