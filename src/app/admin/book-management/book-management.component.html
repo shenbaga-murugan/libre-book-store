@@ -1,4 +1,4 @@
-<form [formGroup]="bookManagementForm" (ngSubmit)="updateBookInfo()">
+<form [formGroup]="bookManagementForm" (ngSubmit)="saveBookInfo(bookIdInput)">
     <div class="card-container" >
         <mat-card appearance="outlined">
             <mat-card-header>
@@ -24,7 +24,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>ISBN </mat-label>
                         <input matInput type="text" id="isbn" name="isbn" formControlName="isbn">
-                        <mat-hint>xxx-x-xx-xxxxxx-x</mat-hint>
+                        <mat-hint>xxx-xx-xxxxx-xx-x</mat-hint>
                     </mat-form-field>
                 </p>
                 <p>
@@ -68,6 +68,7 @@
                                     <mat-option [value]="country">{{ country.name }}</mat-option>
                                 }
                             </mat-select>
+                            <mat-spinner *ngIf="countryLoading" [diameter]="10"></mat-spinner>
                         </mat-form-field>
                     </p>
                     <p>
@@ -79,7 +80,12 @@
                 </div>
             </mat-card-content>
         </mat-card>
-        <button mat-stroked-button type="submit">Save</button>
-        <button mat-stroked-button style="color: red;" type="button">Cancel</button>
+        <button mat-stroked-button type="submit">{{ bookIdInput.value ? "Update" : "Add" }}</button>
+        <button mat-stroked-button style="color: goldenrod;" type="button">Cancel</button>
+        <mat-form-field appearance="outline">
+            <mat-label>Book Id </mat-label>
+            <input matInput type="text" id="id" name="id" formControlName="id" #bookIdInput (change)="getBookInfo(bookIdInput)">
+        </mat-form-field>
+        <button mat-stroked-button style="color: red;" type="button" (click)="deleteBookInfo(+bookIdInput.value)" [disabled]="!bookIdInput.value">Delete</button>
     </div>
 </form>

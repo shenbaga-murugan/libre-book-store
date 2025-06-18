@@ -9,12 +9,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IsbnPipe } from './book-management/isbn.pipe';
 
 
 
 @NgModule({
   declarations: [
-    BookManagementComponent
+    BookManagementComponent,
+    IsbnPipe
   ],
   exports: [
     BookManagementComponent
@@ -27,7 +30,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi())

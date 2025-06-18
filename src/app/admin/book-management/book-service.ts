@@ -44,15 +44,26 @@ export class BookService {
         return this.httpClient.get(this.countriesURL, {headers: headers}) as Observable<Country[]>;
     }
 
-    getBook(bookId: number): Observable<Book>{
+    getBook(bookId: number): Observable<Book> {
         const headers: HttpHeaders = new HttpHeaders({"Access-Control-Allow-Origin": "http://localhost:8080"});
         return this.httpClient.get(this.booksURL+`/${bookId}`, {headers: headers}) as Observable<Book>;
     }
 
-    saveBook(book: Book): Observable<Book>{
+    saveBook(book: Book): Observable<Book> {
+        const headers: HttpHeaders = new HttpHeaders({"Access-Control-Allow-Origin": "http://localhost:8080"});
+        return this.httpClient.put(this.booksURL, book, {headers: headers}) as Observable<Book>;
+    }
+
+    addBook(book: Book): Observable<Book> {
         const headers: HttpHeaders = new HttpHeaders({"Access-Control-Allow-Origin": "http://localhost:8080"});
         return this.httpClient.post(this.booksURL, book, {headers: headers}) as Observable<Book>;
     }
+    
+    deleteBook(bookId: number): Observable<number> {
+        const headers: HttpHeaders = new HttpHeaders({"Access-Control-Allow-Origin": "http://localhost:8080"});
+        return this.httpClient.delete(this.booksURL+`/${bookId}`, {headers: headers}) as Observable<number>;
+    }
+
 }
 
 export interface BookFormat {
@@ -67,6 +78,7 @@ export interface Country {
 }
 
 export interface Book {
+      id?: number;
       bookTitle: string,
       author: string,
       isbn: string,
